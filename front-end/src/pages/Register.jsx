@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { postRequest } from '../utils/api';
+import api from '../services/axios';
 
 export default function Register() {
   const [inputs, setInputs] = useState({
@@ -16,7 +16,7 @@ export default function Register() {
     e.preventDefault();
     setError(false);
     try {
-      await postRequest('/register', inputs);
+      await api.post('/register', { ...inputs });
       navigate('/customer/products');
     } catch (err) {
       if (err) return setError(true);

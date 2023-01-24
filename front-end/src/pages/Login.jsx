@@ -1,19 +1,9 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import LoginForm from '../components/Login-form';
 
-export default function Login() {
-  const navigate = useNavigate();
-
+function Login() {
   return (
-    <div>
-      <h1>Login</h1>
-      <button
-        type="button"
-        data-testid="common_login__button-register"
-        onClick={ () => navigate('/register') }
-      >
-        Registro
-      </button>
-    </div>
+    <LoginForm />
   );
 }
+
+export default Login;

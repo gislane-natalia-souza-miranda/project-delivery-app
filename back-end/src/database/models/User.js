@@ -1,34 +1,45 @@
-const Sequelize = require('sequelize');
+module.exports = (sequelize, DataTypes) => {
+  const User = sequelize.define('User', {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true
+    },
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true
+    },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    role: {
+      type: DataTypes.STRING,
+    }
+  }, {
+    timestamps: false,
+    tableName: 'users',
+    underscored: true,
+  });
 
-const db = require('./index');
-
-const User = db.define('Users', {
-  id: {
-    type: Sequelize.INTEGER,
-    primaryKey: true,
-    autoIncrement: true
-  },
-  name: {
-    type: Sequelize.STRING,
-    allowNull: false
-  },
-  email: {
-    type: Sequelize.STRING,
-    allowNull: false,
-    unique: true
-  },
-  password: {
-    type: Sequelize.STRING,
-    allowNull: false
-  },
-  role: {
-    type: Sequelize.STRING,
-    allowNull: false
+  User.associate = ({ User, Sale }) => {
+    User.hasMany(Sale, {
+      foreignKey: 'userId',
+      as: 'user',
+    })
   }
-}, {
-  timestamps: false,
-  tableName: 'users',
-  underscored: true,
-});
 
-module.exports = User;
+  User.associate = ({ User, Sale }) => {
+    User.hasMany(Sale, {
+      foreignKey: 'sellerId',
+      as: 'seller',
+    })
+  }
+
+  return User;
+}

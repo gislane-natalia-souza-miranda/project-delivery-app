@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import { Redirect } from 'react-router-dom';
+import api from '../services/axios';
 
 function LoginForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [enableLogin, setEnableLogin] = useState(false);
+  const [loginStatus, setLoginStatus] = useState(null);
 
   const handleChange = ({ target }) => {
     if (target.name === 'email') {
@@ -11,6 +14,18 @@ function LoginForm() {
     }
     if (target.name === 'password') {
       setPassword(target.value);
+    }
+  };
+
+  const sendLogin = async () => {
+    try {
+      await api.post('/login', {
+        email,
+        password,
+      });
+      setLoginStatus(true);
+    } catch (error) {
+      setLoginStatus(false);
     }
   };
 
@@ -23,6 +38,7 @@ function LoginForm() {
   }, [email, password]);
   return (
     <>
+      { loginStatus && <Redirect to="/customer/products" /> }
       <form>
         <label htmlFor="email">
           email:
@@ -48,6 +64,7 @@ function LoginForm() {
           data-testid="common_login__button-login"
           type="button"
           disabled={ !enableLogin }
+          onClick={ sendLogin }
         >
           LOGIN
         </button>
@@ -58,11 +75,14 @@ function LoginForm() {
           Ainda não tenho conta
         </button>
       </form>
-      <span
-        data-testid="common_login__element-invalid-email"
-      >
-        s
-      </span>
+      { (loginStatus === false) && (
+        <span
+          data-testid="common_login__element-invalid-email"
+        >
+          falha no login
+        </span>
+      )}
+
     </>
   );
 }

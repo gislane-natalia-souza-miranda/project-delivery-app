@@ -2,7 +2,7 @@ const RegisterService = require("../service/RegisterService");
 const { User } = require('../database/models');
 const Sequelize = require('sequelize');
 
-class UserController {
+class RegisterController {
   constructor() {
     this.service = new RegisterService();
   }
@@ -29,4 +29,4 @@ class UserController {
   }
 }
 
-module.exports = UserController;
+module.exports = RegisterController;

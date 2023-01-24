@@ -6,6 +6,7 @@ class ErrorHandler {
     next,
   ) {
     res.status(500).json({ message: error.message });
+    console.log(error);
     next();
   }
 }

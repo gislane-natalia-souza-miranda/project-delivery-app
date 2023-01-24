@@ -1,14 +1,12 @@
-const { User } = require('../database/models');
 const md5 = require('md5');
+const { User } = require('../database/models');
 
-class RegisterService {
-  signUp = async (data) => {
-    const password = md5(data.password);
+async function signUp(data) {
+  const password = md5(data.password);
 
-    const user = await User.create({...data, password, role: 'customer'});
+  const user = await User.create({ ...data, password, role: 'customer' });
 
-    return user;
-  }
+  return user;
 }
 
-module.exports = RegisterService;
+module.exports = { signUp };

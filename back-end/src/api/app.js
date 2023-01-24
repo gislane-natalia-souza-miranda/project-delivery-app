@@ -1,6 +1,6 @@
 const express = require('express');
-const registerRoutes = require('../routes/RegisterRoutes');
 const cors = require('cors');
+const registerRoutes = require('../routes/RegisterRoutes');
 const ErrorHandler = require('../routes/ErrorHandler');
 
 const app = express();

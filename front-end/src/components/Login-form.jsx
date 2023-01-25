@@ -20,12 +20,17 @@ function LoginForm() {
 
   const sendLogin = async () => {
     try {
-      await api.post('/login', {
+      const { data } = await api.post('/login', {
         email,
         password,
       });
+
+      const { id, ...rest } = data;
+
+      localStorage.user = JSON.stringify(rest);
       setLoginStatus(true);
     } catch (error) {
+      console.log(error);
       setLoginStatus(false);
     }
   };

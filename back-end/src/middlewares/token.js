@@ -1,9 +1,11 @@
 const jwt = require('jsonwebtoken');
+const jwtKey = require("fs")
+  .readFileSync("./jwt.evaluation.key", { encoding: "utf-8" });
 
 function createToken(userBody) {
   const token = jwt.sign(
     userBody,
-    'secret_key',
+    jwtKey,
     { algorithm: 'HS256' },
   );
 
@@ -12,10 +14,9 @@ function createToken(userBody) {
 
 function verifyToken(req, res, next) {
   const { authorization } = req.headers;
-  console.log(authorization);
 
   try {
-    jwt.verify(authorization, 'secret_key');
+    jwt.verify(authorization, jwtKey);
     next();
   } catch(err) {
     res.status(404).json({ message: err.message });

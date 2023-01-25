@@ -6,7 +6,7 @@ function createToken(userBody) {
   const token = jwt.sign(
     userBody,
     jwtKey,
-    { algorithm: 'HS256' },
+    { algorithm: 'HS256', expiresIn: '1d' },
   );
 
   return token;

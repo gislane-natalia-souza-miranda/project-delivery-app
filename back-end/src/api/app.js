@@ -12,7 +12,7 @@ app.use(cors());
 
 app.use(express.json());
 
-app.use('/images', express.static("public"));
+app.use('/images', express.static('public'));
 
 app.use('/register', registerRoutes);
 app.use('/login', LoginRoutes);

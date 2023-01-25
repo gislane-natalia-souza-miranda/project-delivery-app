@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
-const jwtKey = require("fs")
-  .readFileSync("./jwt.evaluation.key", { encoding: "utf-8" });
+const jwtKey = require('fs')
+  .readFileSync('./jwt.evaluation.key', { encoding: 'utf-8' });
 
 function createToken(userBody) {
   const token = jwt.sign(
@@ -18,9 +18,9 @@ function verifyToken(req, res, next) {
   try {
     jwt.verify(authorization, jwtKey);
     next();
-  } catch(err) {
+  } catch (err) {
     res.status(404).json({ message: err.message });
   }
 }
 
-module.exports = {createToken, verifyToken};
+module.exports = { createToken, verifyToken };

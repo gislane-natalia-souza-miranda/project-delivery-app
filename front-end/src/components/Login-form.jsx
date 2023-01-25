@@ -6,7 +6,7 @@ function LoginForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [enableLogin, setEnableLogin] = useState(false);
-  const [loginStatus, setLoginStatus] = useState(null);
+  const [error, setError] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = ({ target }) => {
@@ -19,6 +19,7 @@ function LoginForm() {
   };
 
   const sendLogin = async () => {
+    setError(false);
     try {
       const { data } = await api.post('/login', {
         email,
@@ -28,10 +29,10 @@ function LoginForm() {
       const { id, ...rest } = data;
 
       localStorage.user = JSON.stringify(rest);
-      setLoginStatus(true);
-    } catch (error) {
-      console.log(error);
-      setLoginStatus(false);
+      return navigate('/customer/products');
+    } catch (err) {
+      console.log(err);
+      return setError(true);
     }
   };
 
@@ -44,7 +45,6 @@ function LoginForm() {
   }, [email, password]);
   return (
     <>
-      { loginStatus && navigate('/customer/products') }
       <form>
         <label htmlFor="email">
           email:
@@ -82,7 +82,7 @@ function LoginForm() {
           Ainda não tenho conta
         </button>
       </form>
-      { (loginStatus === false) && (
+      { error && (
         <span
           data-testid="common_login__element-invalid-email"
         >

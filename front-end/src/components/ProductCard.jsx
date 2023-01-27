@@ -41,7 +41,7 @@ export default function ProducCard({ item, index, calculateTotal }) {
         {item.name}
       </h6>
       <h6 data-testid={ `customer_products__element-card-price-${item.id}` }>
-        {item.price.replace(/\./, ',')}
+        { `R$ ${item.price.replace(/\./, ',')}` }
       </h6>
       <img
         style={ { width: '60px', height: '100px' } }

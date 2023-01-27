@@ -54,7 +54,6 @@ export default function Checkout() {
         },
       });
 
-      console.log(data);
       navigate(`/customer/orders/${data.id}`);
     } catch (error) {
       console.log(error.message);

@@ -3,6 +3,7 @@ import './App.css';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import Checkout from './pages/Checkout';
 import CustomerProducts from './pages/CustomerProducts';
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
       <Route path="/login" element={ <Login /> } />
       <Route path="/register" element={ <Register /> } />
       <Route path="/customer/products" element={ <CustomerProducts /> } />
+      <Route path="/customer/checkout" element={ <Checkout /> } />
     </Routes>
   );
 }

@@ -26,9 +26,9 @@ function LoginForm() {
         password,
       });
 
-      const { id, ...rest } = data;
+      // const { id, ...rest } = data;
 
-      localStorage.user = JSON.stringify(rest);
+      localStorage.user = JSON.stringify(data);
       return navigate('/customer/products');
     } catch (err) {
       console.log(err);

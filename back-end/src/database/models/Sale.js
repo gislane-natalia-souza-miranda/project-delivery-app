@@ -1,4 +1,7 @@
 const User = require('./User');
+const moment = require('moment');
+const date = moment().utc().format();
+
 
 module.exports = (sequelize, DataTypes) => {
   const Sale = sequelize.define('Sale', {
@@ -41,10 +44,12 @@ module.exports = (sequelize, DataTypes) => {
     },
     saleDate: {
       type: DataTypes.DATE,
+      defaultValue: sequelize.literal('NOW()'),
       allowNull: false
     },
     status: {
       type: DataTypes.STRING,
+      defaultValue: 'Pendente',
       allowNull: false
     }
   }, {

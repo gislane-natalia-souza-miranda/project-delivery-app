@@ -1,20 +1,32 @@
-const { Sale, SaleProduct } = require('../database/models');
+const { Sale, SaleProduct, User } = require('../database/models');
 
 const insertSale = async (saleParam) => {
   const { products, ...sale } = saleParam;
 
   const inserted = await Sale.create(sale);
 
+  console.log(inserted);
+
   const arr = products.map(({ id, quantity }) => (
     { saleId: inserted.id, productId: id, quantity }));
 
   await SaleProduct.bulkCreate(arr);
 
-  const test = await SaleProduct.findAll({ raw: true });
-
-  console.log(test);
-
   return inserted;
 };
 
-module.exports = { insertSale };
+const getById = async (id) => {
+  const sale = await Sale.findByPk(id, {
+    include: [{
+      model: User,
+      as: 'seller',
+      attributes: ['name'],
+    }],
+  });
+
+  console.log(sale);
+
+  return sale;
+};
+
+module.exports = { insertSale, getById };

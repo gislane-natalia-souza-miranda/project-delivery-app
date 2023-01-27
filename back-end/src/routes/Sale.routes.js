@@ -7,4 +7,6 @@ const route = Router();
 
 route.post('/insert', token.verifyToken, SaleController.insertSale);
 
+route.get('/:id', SaleController.getById);
+
 module.exports = route;

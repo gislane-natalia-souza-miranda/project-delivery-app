@@ -2,14 +2,14 @@ import React from 'react';
 import propTypes from 'prop-types';
 
 export default function OrderTable({ item, index }) {
-  const { name, price, quantity } = item;
+  const { name, price, quantity, id } = item;
   const i = index;
   return (
     <tr key={ i }>
       <td
         data-testid={ `customer_order_details__element-order-table-item-number-${i}` }
       >
-        {i + 1}
+        {id}
       </td>
       <td data-testid={ `customer_order_details__element-order-table-name-${i}` }>
         {name}

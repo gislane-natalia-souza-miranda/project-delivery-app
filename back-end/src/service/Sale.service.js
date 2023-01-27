@@ -1,4 +1,5 @@
-const { Sale, SaleProduct, User } = require('../database/models');
+const { Sale, SaleProduct, User, Product } = require('../database/models');
+const HttpException = require('../utils/httpExecption');
 
 const insertSale = async (saleParam) => {
   const { products, ...sale } = saleParam;
@@ -22,11 +23,34 @@ const getById = async (id) => {
       as: 'seller',
       attributes: ['name'],
     }],
+    raw: true,
   });
 
-  console.log(sale);
+  if (sale) {
+    const prod = await SaleProduct.findAll({
+      where: {
+          saleId: id
+      },
+      include: Product,
+      raw: true,
+    });
+  
+    const prodObj = prod.map((item) => {
+      const obj = {
+        id: item.productId,
+        name: item['Product.name'],
+        price: item['Product.price'],
+        quantity: item.quantity
+      };
+      return obj;
+    });
+  
+    const result = {...sale, sellerName: sale['seller.name'], products: [...prodObj]};
+  
+    return result;
+  }
 
-  return sale;
+  throw new HttpException(404, 'Pedido não encontrado');
 };
 
 module.exports = { insertSale, getById };

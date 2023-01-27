@@ -6,11 +6,9 @@ import OrderTable from '../components/OrderTable';
 
 export default function CustomerDetails() {
   const [order, setOrder] = useState({});
-  const [cart, setCart] = useState([]);
   const { id } = useParams();
 
   useEffect(() => {
-    const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
     const getOrder = async () => {
       try {
         const { data } = await api.get(`/orders/${id}`);
@@ -24,11 +22,11 @@ export default function CustomerDetails() {
     };
 
     getOrder();
-    setCart(carrinho);
   }, []);
 
   return (
     <div>
+      {console.log(order)}
       <span
         data-testid="customer_order_details__element-order-details-label-order-id"
       >
@@ -37,7 +35,7 @@ export default function CustomerDetails() {
       <span
         data-testid="customer_order_details__element-order-details-label-seller-name"
       >
-        {order?.seller && order.seller.name}
+        {order?.sellerName && order.sellerName}
       </span>
       <span
         data-testid="customer_order_details__element-order-details-label-order-date"
@@ -72,7 +70,7 @@ export default function CustomerDetails() {
           </tr>
         </thead>
         <tbody>
-          {cart.length ? cart.map((item, i) => (<OrderTable
+          {order?.products ? order.products.map((item, i) => (<OrderTable
             key={ i }
             item={ item }
             index={ i }

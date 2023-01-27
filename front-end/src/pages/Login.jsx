@@ -6,17 +6,17 @@ import api from '../services/axios';
 function Login() {
   const navigate = useNavigate();
 
-  const sales = async () => {
-    const user = JSON.parse(localStorage.getItem('user'));
-    if (user) {
-      const { data } = await api.get('/orders/customer');
-      if (data) {
-        return navigate('/customer/orders');
-      }
-    }
-  };
-
   useEffect(() => {
+    const sales = async () => {
+      const user = JSON.parse(localStorage.getItem('user'));
+      if (user) {
+        const { data } = await api.get('/orders/customer');
+        if (data) {
+          return navigate('/customer/products');
+        }
+      }
+    };
+
     sales();
   }, []);
 

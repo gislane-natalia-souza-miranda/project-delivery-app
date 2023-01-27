@@ -1,9 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
+import moment from 'moment';
 
 function OrderCard(props) {
   const { item: { id, status, saleDate, totalPrice } } = props;
+  const formattedDate = moment(saleDate).format('DD/MM/YYYY');
   // id, pedido, status, data, preço
   return (
     <NavLink
@@ -18,12 +20,13 @@ function OrderCard(props) {
 
       </div>
       <div data-testid={ `customer_orders__element-order-date-${id}` }>
-        {`Data: ${saleDate}`}
+        {`Data: ${formattedDate}`}
 
       </div>
-      <div data-testid={ `customer_orders__element-card-price-${id}` }>
-        {`Preço: ${totalPrice}`}
-      </div>
+      Preço:
+      <span data-testid={ `customer_orders__element-card-price-${id}` }>
+        {totalPrice.replace(/\./, ',')}
+      </span>
     </NavLink>
   );
 }

@@ -8,7 +8,7 @@ function CustomerOrders() {
 
   const getOrders = async () => {
     const { data } = await api.get('/orders/customer');
-    console.log(data);
+
     setOrders(data);
   };
 
@@ -20,7 +20,7 @@ function CustomerOrders() {
     <>
       <HeaderNavBar />
 
-      { orders.map((item) => (
+      {orders.length && orders.map((item) => (
 
         <OrderCard
           key={ item.id }

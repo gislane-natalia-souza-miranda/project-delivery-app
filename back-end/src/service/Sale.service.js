@@ -16,6 +16,30 @@ const insertSale = async (saleParam) => {
   return inserted;
 };
 
+const getProducts = async (sale, id) => {
+  const prod = await SaleProduct.findAll({
+    where: {
+        saleId: id,
+    },
+    include: Product,
+    raw: true,
+  });
+
+  const prodObj = prod.map((item) => {
+    const obj = {
+      id: item.productId,
+      name: item['Product.name'],
+      price: item['Product.price'],
+      quantity: item.quantity,
+    };
+    return obj;
+  });
+
+  const result = { ...sale, sellerName: sale['seller.name'], products: [...prodObj] };
+
+  return result;
+};
+
 const getById = async (id) => {
   const sale = await Sale.findByPk(id, {
     include: [{
@@ -27,27 +51,7 @@ const getById = async (id) => {
   });
 
   if (sale) {
-    const prod = await SaleProduct.findAll({
-      where: {
-          saleId: id
-      },
-      include: Product,
-      raw: true,
-    });
-  
-    const prodObj = prod.map((item) => {
-      const obj = {
-        id: item.productId,
-        name: item['Product.name'],
-        price: item['Product.price'],
-        quantity: item.quantity
-      };
-      return obj;
-    });
-  
-    const result = {...sale, sellerName: sale['seller.name'], products: [...prodObj]};
-  
-    return result;
+    return getProducts(sale, id);
   }
 
   throw new HttpException(404, 'Pedido não encontrado');

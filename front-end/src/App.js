@@ -3,7 +3,7 @@ import './App.css';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import Login from './pages/Login';
 import Register from './pages/Register';
-import Orders from './pages/Orders';
+import CustomerOrders from './pages/CustomerOrders';
 import CustomerProducts from './pages/CustomerProducts';
 
 function App() {
@@ -12,7 +12,7 @@ function App() {
       <Route path="/" element={ <Navigate to="/login" /> } />
       <Route path="/login" element={ <Login /> } />
       <Route path="/register" element={ <Register /> } />
-      <Route path="/customer/orders" element={ <Orders /> } />
+      <Route path="/customer/orders" element={ <CustomerOrders /> } />
       <Route path="/customer/products" element={ <CustomerProducts /> } />
     </Routes>
   );

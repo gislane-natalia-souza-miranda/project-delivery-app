@@ -10,11 +10,13 @@ const insertSale = async (saleParam) => {
 
   await SaleProduct.bulkCreate(arr);
 
-  const test = await SaleProduct.findAll({ raw: true });
-
-  console.log(test);
-
   return inserted;
 };
 
-module.exports = { insertSale };
+const getAll = async () => {
+  const sales = await Sale.findAll();
+  console.log('service', sales);
+  return sales;
+};
+
+module.exports = { insertSale, getAll };

@@ -3,14 +3,14 @@ import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 
 function OrderCard(props) {
-  const { item: { id, pedido, status, data, preco } } = props;
+  const { item: { id, status, saleDate, totalPrice } } = props;
   // id, pedido, status, data, preço
   return (
     <NavLink
       to={ `/customer/orders/${id}` }
     >
       <div data-testid={ `customer_orders__element-order-id-${id}` }>
-        {`Pedido: ${pedido}`}
+        {`Pedido: ${id}`}
       </div>
 
       <div data-testid={ `customer_orders__element-delivery-status-${id}` }>
@@ -18,11 +18,11 @@ function OrderCard(props) {
 
       </div>
       <div data-testid={ `customer_orders__element-order-date-${id}` }>
-        {`Data: ${data}`}
+        {`Data: ${saleDate}`}
 
       </div>
       <div data-testid={ `customer_orders__element-card-price-${id}` }>
-        {`Preço: ${preco}`}
+        {`Preço: ${totalPrice}`}
       </div>
     </NavLink>
   );
@@ -33,9 +33,8 @@ export default OrderCard;
 OrderCard.propTypes = {
   item: PropTypes.shape({
     id: PropTypes.number,
-    pedido: PropTypes.number,
     status: PropTypes.string,
-    data: PropTypes.string,
-    preco: PropTypes.number,
+    saleDate: PropTypes.string,
+    totalPrice: PropTypes.string,
   }).isRequired,
 };

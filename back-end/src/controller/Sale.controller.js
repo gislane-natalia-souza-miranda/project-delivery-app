@@ -6,4 +6,10 @@ const insertSale = async (req, res) => {
   res.status(201).json(inserted);
 };
 
-module.exports = { insertSale };
+const getAll = async (_req, res) => {
+  const sales = await SaleService.getAll();
+  
+  res.status(200).json(sales);
+};
+
+module.exports = { insertSale, getAll };

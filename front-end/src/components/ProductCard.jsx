@@ -37,21 +37,21 @@ export default function ProducCard({ item, index, calculateTotal }) {
 
   return (
     <div key={ index }>
-      <h6 data-testid={ `customer_products__element-card-title-${index + 1}` }>
+      <h6 data-testid={ `customer_products__element-card-title-${item.id}` }>
         {item.name}
       </h6>
-      <h6 data-testid={ `customer_products__element-card-price-${index + 1}` }>
-        {item.price.replace(/\./, ',')}
+      <h6 data-testid={ `customer_products__element-card-price-${item.id}` }>
+        { `R$ ${item.price.replace(/\./, ',')}` }
       </h6>
       <img
         style={ { width: '60px', height: '100px' } }
         alt={ item.name }
         src={ item.urlImage }
-        data-testid={ `customer_products__img-card-bg-image-${index + 1}` }
+        data-testid={ `customer_products__img-card-bg-image-${item.id}` }
       />
       <button
         type="button"
-        data-testid={ `customer_products__button-card-add-item-${index + 1}` }
+        data-testid={ `customer_products__button-card-add-item-${item.id}` }
         onClick={ () => setQuantity((prevState) => {
           const result = prevState + 1;
           return result;
@@ -61,7 +61,7 @@ export default function ProducCard({ item, index, calculateTotal }) {
       </button>
       <button
         type="button"
-        data-testid={ `customer_products__button-card-rm-item-${index + 1}` }
+        data-testid={ `customer_products__button-card-rm-item-${item.id}` }
         onClick={ () => setQuantity((prevState) => {
           const result = prevState - 1;
           return result;
@@ -75,7 +75,7 @@ export default function ProducCard({ item, index, calculateTotal }) {
         onChange={ (e) => {
           setQuantity(Number(e.target.value));
         } }
-        data-testid={ `customer_products__input-card-quantity-${index + 1}` }
+        data-testid={ `customer_products__input-card-quantity-${item.id}` }
       />
     </div>
   );

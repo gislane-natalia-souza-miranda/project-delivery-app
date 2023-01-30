@@ -60,8 +60,6 @@ function CustomerProducts() {
           {`Ver carrinho: R$ ${price && price.toFixed(2).replace(/\./, ',')}`}
         </span>
       </button>
-      {/* - 21: customer_products__button-cart
-- 22: customer_products__checkout-bottom-value */}
     </div>
   );
 }

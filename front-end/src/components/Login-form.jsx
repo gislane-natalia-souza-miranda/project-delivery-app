@@ -18,6 +18,25 @@ function LoginForm() {
     }
   };
 
+  /* const sendLogin = async () => {
+    setError(false);
+    try {
+      const { data } = await api.post('/login', {
+        email,
+        password,
+      });
+      console.log('data: ', data.role);
+
+      // const { id, ...rest } = data;
+
+      localStorage.user = JSON.stringify(data);
+      navigate('/customer/products');
+    } catch (err) {
+      console.log(err);
+      setError(true);
+    }
+  }; */
+
   const sendLogin = async () => {
     setError(false);
     try {
@@ -25,14 +44,15 @@ function LoginForm() {
         email,
         password,
       });
-
-      // const { id, ...rest } = data;
-
+      console.log('data: ', data.role);
       localStorage.user = JSON.stringify(data);
+      if (data.role === 'administrator') {
+        return navigate('/admin/manage');
+      }
       return navigate('/customer/products');
     } catch (err) {
       console.log(err);
-      return setError(true);
+      setError(true);
     }
   };
 

@@ -1,10 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { NavLink } from 'react-router-dom';
 
 function SellerOrder({ order }) {
   return (
-    <li>
-      <div>
+    <NavLink to={ `/seller/orders/${order.id}` }>
+      <li>
+
         <div
           data-testid={ `seller_orders__element-order-id-${order.id}` }
         >
@@ -36,8 +38,9 @@ function SellerOrder({ order }) {
           { order.deliveryAddress }
 
         </div>
-      </div>
-    </li>
+
+      </li>
+    </NavLink>
   );
 }
 

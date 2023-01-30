@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import LoginForm from '../components/Login-form';
-import api from '../services/axios';
 
 function Login() {
   const navigate = useNavigate();
@@ -10,11 +9,15 @@ function Login() {
     const sales = async () => {
       const user = JSON.parse(localStorage.getItem('user'));
       if (user) {
-        const { data } = await api.get('/orders/customer');
-        if (data) {
-          return navigate('/customer/products');
+        if (user.role === 'administrator') {
+          return navigate('/admin/manage');
         }
+        if (user.role === 'seller') {
+          return navigate('/seller/orders');
+        }
+        return navigate('/customer/products');
       }
+      // return navigate('/login');
     };
 
     sales();

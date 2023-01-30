@@ -20,6 +20,7 @@ app.use('/images', express.static('public'));
 app.use('/register', registerRoutes);
 app.use('/login', LoginRoutes);
 app.use('/customer', ProductRoutes);
+app.use('/seller', SaleRoutes);
 app.use('/users', UserRoutes);
 app.use('/orders', SaleRoutes);
 app.use('/admin', AdminRoutes);

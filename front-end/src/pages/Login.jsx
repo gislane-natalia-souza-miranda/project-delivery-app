@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import LoginForm from '../components/Login-form';
-// import api from '../services/axios';
 
 function Login() {
   const navigate = useNavigate();
@@ -13,6 +12,9 @@ function Login() {
       if (user) {
         if (user.role === 'administrator') {
           return navigate('/admin/manage');
+        }
+        if (user.role === 'seller') {
+          return navigate('/seller/orders');
         }
         return navigate('/customer/products');
       }

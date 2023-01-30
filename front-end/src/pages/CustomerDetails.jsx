@@ -28,7 +28,7 @@ export default function CustomerDetails() {
   return (
     <div>
       <HeaderNavBar />
-
+      {console.log(order)}
       <span
         data-testid="customer_order_details__element-order-details-label-order-id"
       >

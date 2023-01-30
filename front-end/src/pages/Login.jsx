@@ -10,14 +10,13 @@ function Login() {
   useEffect(() => {
     const sales = async () => {
       const user = JSON.parse(localStorage.getItem('user'));
-      console.log('voltei', user);
       if (user) {
         if (user.role === 'administrator') {
           return navigate('/admin/manage');
         }
         return navigate('/customer/products');
       }
-      return navigate('/login');
+      // return navigate('/login');
     };
 
     sales();

@@ -7,6 +7,7 @@ const LoginRoutes = require('../routes/Login.router');
 const ProductRoutes = require('../routes/Products.router');
 const UserRoutes = require('../routes/User.routes');
 const SaleRoutes = require('../routes/Sale.routes');
+const AdminRoutes = require('../routes/Admin.router')
 
 const app = express();
 
@@ -21,6 +22,7 @@ app.use('/login', LoginRoutes);
 app.use('/customer', ProductRoutes);
 app.use('/users', UserRoutes);
 app.use('/orders', SaleRoutes);
+app.use('/admin', AdminRoutes);
 
 // app.get('/coffee', (_req, res) => res.status(418).end());
 

@@ -33,7 +33,8 @@ export default function Register() {
     const FIVE = 6;
     const TWELVE = 12;
 
-    if (name.length >= TWELVE && password.length >= FIVE && emailRegex.test(email)) {
+    if (name.trim().length >= TWELVE // .trim() tirar espaços em branco
+    && password.length >= FIVE && emailRegex.test(email)) {
       return setDisableBtn(false);
     }
 

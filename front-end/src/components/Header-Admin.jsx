@@ -1,7 +1,14 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 function HeaderAdmin() {
+  const [user, setUser] = useState('');
+
+  useEffect(() => {
+    const { name } = JSON.parse(localStorage.getItem('user'));
+    setUser(name);
+  }, []);
+
   return (
     <div>
       <Link
@@ -11,7 +18,7 @@ function HeaderAdmin() {
         Gerenciar Usuários
       </Link>
       <span data-testid="customer_products__element-navbar-user-full-name">
-        Nome Administrador
+        {user}
       </span>
       <button
         type="button"

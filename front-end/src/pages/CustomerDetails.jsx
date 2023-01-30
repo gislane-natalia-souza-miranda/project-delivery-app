@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import moment from 'moment';
 import api from '../services/axios';
 import OrderTable from '../components/OrderTable';
+import HeaderNavBar from '../components/Header-navbar';
 
 export default function CustomerDetails() {
   const [order, setOrder] = useState({});
@@ -26,6 +27,7 @@ export default function CustomerDetails() {
 
   return (
     <div>
+      <HeaderNavBar />
       {console.log(order)}
       <span
         data-testid="customer_order_details__element-order-details-label-order-id"

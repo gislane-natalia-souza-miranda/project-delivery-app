@@ -29,6 +29,15 @@ function LoginForm() {
       // const { id, ...rest } = data;
 
       localStorage.user = JSON.stringify(data);
+
+      const user = JSON.parse(localStorage.getItem('user'));
+
+      if (user.role === 'administrator') {
+        return navigate('/admin/manage');
+      }
+      if (user.role === 'seller') {
+        return navigate('/seller/orders');
+      }
       return navigate('/customer/products');
     } catch (err) {
       console.log(err);

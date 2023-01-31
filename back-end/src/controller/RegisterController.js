@@ -1,6 +1,7 @@
 const Sequelize = require('sequelize');
 const register = require('../service/RegisterService');
 const { User } = require('../database/models');
+const { createToken } = require('../middlewares/token');
 
 async function signUp(req, res, next) {
   const { name, email } = req.body;
@@ -17,7 +18,9 @@ async function signUp(req, res, next) {
   try {
     const insertedUser = await register.signUp(req.body);
 
-    return res.status(201).json(insertedUser);
+    const token = createToken(insertedUser);
+
+    return res.status(201).json({ ...insertedUser, token });
   } catch (error) {
     next(error);
   }

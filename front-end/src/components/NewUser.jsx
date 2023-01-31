@@ -3,33 +3,31 @@ import { useNavigate } from 'react-router-dom';
 import api from '../services/axios';
 
 function NewUser() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [name, setName] = useState('');
+  const [inputs, setInputs] = useState({
+    name: '',
+    password: '',
+    email: '',
+    role: 'customer',
+  });
   const [enableRegistre, setEnableRegistre] = useState(false);
   const [error, setError] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = ({ target }) => {
-    if (target.name === 'email') {
-      setEmail(target.value);
-    }
-    if (target.name === 'password') {
-      setPassword(target.value);
-    }
-    if (target.name === 'name') {
-      setName(target.value);
-    }
+    setInputs({ ...inputs, [target.name]: target.value });
   };
 
-  const sendRegistre = async () => {
+  const sendRegistre = async (e) => {
+    e.preventDefault();
     setError(false);
     try {
-      const { data } = await api.post('/login', {
-        email,
-        password,
-        name,
-      });
+      const { token } = JSON.parse(localStorage.getItem('user'));
+
+      const { data } = await api.post(
+        '/register/admin',
+        inputs,
+        { headers: { authorization: token } },
+      );
 
       localStorage.user = JSON.stringify(data);
       return navigate('/admin/manage');
@@ -42,16 +40,16 @@ function NewUser() {
   useEffect(() => {
     const MIN_PASSWORD = 6;
     const MIN_NAME = 12;
-    const isValidEmail = /\S+@\S+\.\S+/.test(email);
-    const isValidPassword = password.length >= MIN_PASSWORD;
-    const isValidName = name.trim().length >= MIN_NAME; // .trim() tirar espaços em branco
+    const isValidEmail = /\S+@\S+\.\S+/.test(inputs.email);
+    const isValidPassword = inputs.password.length >= MIN_PASSWORD;
+    const isValidName = inputs.name.trim().length >= MIN_NAME; // .trim() tirar espaços em branco
 
     setEnableRegistre(isValidEmail && isValidPassword && isValidName);
-  }, [email, password, name]);
+  }, [inputs]);
 
   return (
     <>
-      <form>
+      <form onSubmit={ sendRegistre }>
         <label htmlFor="name">
           Nome:
           <input
@@ -68,7 +66,7 @@ function NewUser() {
             data-testid="admin_manage__input-email"
             type="email"
             name="email"
-            value={ email }
+            value={ inputs.email }
             onChange={ handleChange }
           />
         </label>
@@ -79,7 +77,7 @@ function NewUser() {
             data-testid="admin_manage__input-password"
             type="password"
             name="password"
-            value={ password }
+            value={ inputs.password }
             onChange={ handleChange }
           />
         </label>
@@ -92,7 +90,7 @@ function NewUser() {
             onChange={ handleChange }
           >
             <option value="customer">Cliente</option>
-            <option value="admin">Administrador(a)</option>
+            <option value="administrator">Administrador(a)</option>
             <option value="seller">Vendedor(a)</option>
           </select>
         </label>

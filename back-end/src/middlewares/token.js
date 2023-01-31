@@ -1,10 +1,10 @@
 const jwt = require('jsonwebtoken');
-const jwtKey = require('fs')
-  .readFileSync('./jwt.evaluation.key', { encoding: 'utf-8' });
+const jwtKey = require('fs').readFileSync('./jwt.evaluation.key', { encoding: 'utf-8' });
 
 function createToken(userBody) {
+  const { password, ...rest } = userBody;
   const token = jwt.sign(
-    userBody,
+    rest,
     jwtKey,
     { algorithm: 'HS256', expiresIn: '1d' },
   );

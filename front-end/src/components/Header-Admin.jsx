@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function HeaderAdmin() {
   const [user, setUser] = useState('');
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const { name } = JSON.parse(localStorage.getItem('user'));
-    setUser(name);
+    const usr = JSON.parse(localStorage.getItem('user'));
+    if (!usr) return navigate('/login');
+    setUser(usr.name);
   }, []);
 
   return (

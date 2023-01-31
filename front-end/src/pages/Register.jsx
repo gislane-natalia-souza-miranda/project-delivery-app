@@ -16,7 +16,8 @@ export default function Register() {
     e.preventDefault();
     setError(false);
     try {
-      await api.post('/register', { ...inputs });
+      const { data } = await api.post('/register', { ...inputs });
+      localStorage.user = JSON.stringify(data);
       navigate('/customer/products');
     } catch (err) {
       if (err) return setError(true);

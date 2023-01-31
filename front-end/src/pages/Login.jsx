@@ -5,6 +5,7 @@ import LoginForm from '../components/Login-form';
 function Login() {
   const navigate = useNavigate();
 
+  // modifiquei aqui
   useEffect(() => {
     const sales = async () => {
       const user = JSON.parse(localStorage.getItem('user'));

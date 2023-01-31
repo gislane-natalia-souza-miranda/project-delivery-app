@@ -6,4 +6,6 @@ const route = Router();
 
 route.post('/', registerController.signUp);
 
+route.post('/admin', registerController.signUp);
+
 module.exports = route;

@@ -16,7 +16,8 @@ export default function Register() {
     e.preventDefault();
     setError(false);
     try {
-      await api.post('/register', { ...inputs });
+      const { data } = await api.post('/register', { ...inputs });
+      localStorage.user = JSON.stringify(data);
       navigate('/customer/products');
     } catch (err) {
       if (err) return setError(true);
@@ -33,7 +34,8 @@ export default function Register() {
     const FIVE = 6;
     const TWELVE = 12;
 
-    if (name.length >= TWELVE && password.length >= FIVE && emailRegex.test(email)) {
+    if (name.trim().length >= TWELVE // .trim() tirar espaços em branco
+    && password.length >= FIVE && emailRegex.test(email)) {
       return setDisableBtn(false);
     }
 

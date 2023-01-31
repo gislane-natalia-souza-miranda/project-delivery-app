@@ -25,23 +25,18 @@ function LoginForm() {
         email,
         password,
       });
-
-      // const { id, ...rest } = data;
-
+      console.log('data: ', data.role);
       localStorage.user = JSON.stringify(data);
-
-      const user = JSON.parse(localStorage.getItem('user'));
-
-      if (user.role === 'administrator') {
+      if (data.role === 'administrator') {
         return navigate('/admin/manage');
       }
-      if (user.role === 'seller') {
+      if (data.role === 'seller') {
         return navigate('/seller/orders');
       }
       return navigate('/customer/products');
     } catch (err) {
       console.log(err);
-      return setError(true);
+      setError(true);
     }
   };
 

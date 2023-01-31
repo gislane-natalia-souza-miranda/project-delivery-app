@@ -73,4 +73,8 @@ const getById = async (id) => {
   throw new HttpException(404, 'Pedido não encontrado');
 };
 
-module.exports = { insertSale, getById, getAll, getSalesById };
+const update = async (id, status) => {
+  await Sale.update({ status }, { where: { id } });
+};
+
+module.exports = { insertSale, getById, getAll, getSalesById, update };

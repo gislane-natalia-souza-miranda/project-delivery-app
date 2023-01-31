@@ -26,4 +26,9 @@ const getAll = async (_req, res) => {
   res.status(200).json(sales);
 };
 
-module.exports = { insertSale, getById, getAll, getSalesById };
+const update = async (req, res) => {
+  await SaleService.update(req.params.id, req.body.status);
+  return res.status(200).end();
+};
+
+module.exports = { insertSale, getById, getAll, getSalesById, update };

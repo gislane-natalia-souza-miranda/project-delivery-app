@@ -3,11 +3,12 @@ import './App.css';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import Login from './pages/Login';
 import Register from './pages/Register';
-import CustomerOrders from './pages/CustomerOrders';
-import Checkout from './pages/Checkout';
 import CustomerProducts from './pages/CustomerProducts';
-import SellerOrders from './pages/SellerOrders';
+import Checkout from './pages/Checkout';
+import CustomerOrders from './pages/CustomerOrders';
 import CustomerDetails from './pages/CustomerDetails';
+import SellerOrders from './pages/SellerOrders';
+import SellerOrdersDetails from './pages/SellerOrdersDetails';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
       <Route path="/customer/checkout" element={ <Checkout /> } />
       <Route path="/customer/orders/:id" element={ <CustomerDetails /> } />
       <Route path="/seller/orders" element={ <SellerOrders /> } />
+      <Route path="/seller/orders/:id" element={ <SellerOrdersDetails /> } />
     </Routes>
   );
 }

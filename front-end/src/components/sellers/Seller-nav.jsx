@@ -5,13 +5,13 @@ import PropTypes from 'prop-types';
 function SellerNav({ user }) {
   return (
     <nav>
-      <div
+      <Link
+        to="/seller/orders"
         data-testid="customer_products__element-navbar-link-orders"
       >
-        <Link to="/seller/orders">
-          Pedidos
-        </Link>
-      </div>
+        Pedidos
+      </Link>
+
       <div
         data-testid="customer_products__element-navbar-user-full-name"
       >

@@ -5,6 +5,6 @@ const getAll = async () => {
   return users;
 };
 
-const deleteByID = async (id) => { await User.destroy({ where: { id }}) };
+const deleteByID = async (id) => { await User.destroy({ where: { id } }); };
 
 module.exports = { getAll, deleteByID };

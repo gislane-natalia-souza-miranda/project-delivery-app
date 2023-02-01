@@ -25,7 +25,6 @@ function SellerNav({ user }) {
         type="button"
         data-testid="customer_products__element-navbar-link-logout"
         onClick={ () => localStorage.clear('user') }
-
       >
         <Link to="/login">
           Logout

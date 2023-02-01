@@ -9,26 +9,34 @@ export default function CustomerDetails() {
   const [order, setOrder] = useState({});
   const { id } = useParams();
 
+  const getOrder = async () => {
+    try {
+      const { data } = await api.get(`/orders/${id}`);
+
+      const formattedDate = moment(data.saleDate).format('DD/MM/YYYY');
+
+      setOrder({ ...data, saleDate: formattedDate });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
   useEffect(() => {
-    const getOrder = async () => {
-      try {
-        const { data } = await api.get(`/orders/${id}`);
-
-        const formattedDate = moment(data.saleDate).format('DD/MM/YYYY');
-
-        setOrder({ ...data, saleDate: formattedDate });
-      } catch (error) {
-        console.log(error.message);
-      }
-    };
-
     getOrder();
   }, []);
+
+  const changeStatus = async (status) => {
+    try {
+      await api.patch(`/seller/orders/${order.id}`, { status });
+      getOrder();
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div>
       <HeaderNavBar />
-      {console.log(order)}
       <span
         data-testid="customer_order_details__element-order-details-label-order-id"
       >
@@ -57,7 +65,8 @@ export default function CustomerDetails() {
       <button
         type="button"
         data-testid="customer_order_details__button-delivery-check"
-        disabled
+        disabled={ order.status !== 'Em Trânsito' }
+        onClick={ () => changeStatus('Entregue') }
       >
         Marcar como entregue
       </button>

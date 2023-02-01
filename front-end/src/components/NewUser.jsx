@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import api from '../services/axios';
 
-function NewUser() {
+function NewUser({ getUsers }) {
   const [inputs, setInputs] = useState({
     name: '',
     password: '',
@@ -30,6 +31,7 @@ function NewUser() {
       );
 
       localStorage.user = JSON.stringify(data);
+      getUsers();
       return navigate('/admin/manage');
     } catch (err) {
       console.log(err);
@@ -116,5 +118,9 @@ function NewUser() {
     </>
   );
 }
+
+NewUser.propTypes = {
+  getUsers: PropTypes.func,
+}.isRequired;
 
 export default NewUser;

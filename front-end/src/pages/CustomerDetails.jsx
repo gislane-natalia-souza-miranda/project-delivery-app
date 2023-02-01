@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import moment from 'moment';
 import api from '../services/axios';
-import OrderTable from '../components/OrderTable';
 import HeaderNavBar from '../components/Header-navbar';
+import CustomerDetailsTable from '../components/CustomerDetailsTable';
+import '../styles/CustomerDetails.css';
 
 export default function CustomerDetails() {
   const [order, setOrder] = useState({});
@@ -35,59 +36,57 @@ export default function CustomerDetails() {
   };
 
   return (
-    <div>
+    <>
       <HeaderNavBar />
-      <span
-        data-testid="customer_order_details__element-order-details-label-order-id"
-      >
-        {order.id}
-      </span>
-      <span
-        data-testid="customer_order_details__element-order-details-label-seller-name"
-      >
-        {order?.sellerName && order.sellerName}
-      </span>
-      <span
-        data-testid="customer_order_details__element-order-details-label-order-date"
-      >
-        {order.saleDate}
-      </span>
-      <span
-        data-testid="customer_order_details__element-order-details-label-delivery-status"
-      >
-        {order.status}
-      </span>
-      <span
-        data-testid="customer_order_details__element-order-total-price"
-      >
-        {order?.totalPrice && order.totalPrice.replace(/\./, ',')}
-      </span>
-      <button
-        type="button"
-        data-testid="customer_order_details__button-delivery-check"
-        disabled={ order.status !== 'Em Trânsito' }
-        onClick={ () => changeStatus('Entregue') }
-      >
-        Marcar como entregue
-      </button>
-      <table style={ { textAlign: 'center' } }>
-        <thead>
-          <tr>
-            <th>Item</th>
-            <th>Descrição</th>
-            <th>Quantidade</th>
-            <th>Valor Unitário</th>
-            <th>Sub-total</th>
-          </tr>
-        </thead>
-        <tbody>
-          {order?.products ? order.products.map((item, i) => (<OrderTable
-            key={ i }
-            item={ item }
-            index={ i }
-          />)) : <tr />}
-        </tbody>
-      </table>
-    </div>
+      <div className="order-details-container">
+        <h3>Detalhes do Pedido</h3>
+        <div className="order-details">
+          <div className="order-info-container">
+            <span
+              style={ { fontWeight: 'bold' } }
+              data-testid="customer_order_details__element-order-details-label-order-id"
+            >
+              {`PEDIDO: 000${order.id}`}
+            </span>
+            <span
+              data-testid="customer_order_details__element
+              -order-details-label-seller-name"
+              style={ { fontWeight: 'bold' } }
+            >
+              {`P. Vend: ${order?.sellerName && order.sellerName}`}
+            </span>
+            <span
+              data-testid="customer_order_details__element-order-details-label-order-date"
+              style={ { fontWeight: 'bold' } }
+            >
+              {order.saleDate}
+            </span>
+            <span
+              data-testid="customer_order_details__element
+          -order-details-label-delivery-status"
+              style={ { fontWeight: 'bold' } }
+            >
+              {order.status}
+            </span>
+            <button
+              type="button"
+              className="btn btn-success"
+              data-testid="customer_order_details__button-delivery-check"
+              disabled={ order.status !== 'Em Trânsito' }
+              onClick={ () => changeStatus('Entregue') }
+            >
+              Marcar como entregue
+            </button>
+          </div>
+          <CustomerDetailsTable order={ order } />
+          <span
+            data-testid="customer_order_details__element-order-total-price"
+            className="total-price-btn"
+          >
+            {`Total: R$ ${order?.totalPrice && order.totalPrice.replace(/\./, ',')}`}
+          </span>
+        </div>
+      </div>
+    </>
   );
 }

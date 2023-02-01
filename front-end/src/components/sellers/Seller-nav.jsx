@@ -4,10 +4,11 @@ import PropTypes from 'prop-types';
 
 function SellerNav({ user }) {
   return (
-    <nav>
+    <nav className="header-container" style={ { top: 0 } }>
       <Link
         to="/seller/orders"
         data-testid="customer_products__element-navbar-link-orders"
+        className="btn btn-success"
       >
         Pedidos
       </Link>
@@ -15,21 +16,20 @@ function SellerNav({ user }) {
       <div
         data-testid="customer_products__element-navbar-user-full-name"
       >
-        <p>
+        <span style={ { fontWeight: 'bold', fontSize: '15pt' } }>
           {' '}
           { user.name }
           {' '}
-        </p>
+        </span>
       </div>
-      <button
-        type="button"
+      <Link
+        to="/login"
+        className="btn btn-danger"
         data-testid="customer_products__element-navbar-link-logout"
         onClick={ () => localStorage.clear('user') }
       >
-        <Link to="/login">
-          Logout
-        </Link>
-      </button>
+        Logout
+      </Link>
     </nav>
   );
 }

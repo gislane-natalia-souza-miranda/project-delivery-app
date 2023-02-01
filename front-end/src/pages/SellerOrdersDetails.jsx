@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import moment from 'moment';
 import api from '../services/axios';
 import SellerNav from '../components/sellers/Seller-nav';
-import SellerOrderTable from '../components/sellers/SellerOrderTable';
+import CustomerDetailsTable from '../components/CustomerDetailsTable';
 
 export default function CustomerDetails() {
   const [user, setUser] = useState((''));
@@ -35,59 +35,66 @@ export default function CustomerDetails() {
   }, []);
 
   return (
-    <div>
+    <div className="order-details-container">
       <SellerNav user={ user } />
-      <span data-testid="seller_order_details__element-order-details-label-order-id">
-        {order.id}
-      </span>
-      <span data-testid="customer_order_details__element-order-details-label-seller-name">
-        {order?.sellerName && order.sellerName}
-      </span>
-      <span data-testid="seller_order_details__element-order-details-label-order-date">
-        {order.saleDate}
-      </span>
-      <span
-        data-testid="seller_order_details__element-order-details-label-delivery-status"
-      >
-        {order.status}
-      </span>
-      <span data-testid="seller_order_details__element-order-total-price">
-        {order?.totalPrice && order.totalPrice.replace(/\./, ',')}
-      </span>
-      <button
-        type="button"
-        data-testid="seller_order_details__button-preparing-check"
-        disabled={ order.status !== 'Pendente' }
-        onClick={ () => changeStatus('Preparando') }
-      >
-        Em Preparo
-      </button>
-      <button
-        type="button"
-        data-testid="seller_order_details__button-dispatch-check"
-        disabled={ order.status !== 'Preparando' }
-        onClick={ () => changeStatus('Em Trânsito') }
-      >
-        Enviado
-      </button>
-      <table style={ { textAlign: 'center' } }>
-        <thead>
-          <tr>
-            <th>Item</th>
-            <th>Descrição</th>
-            <th>Quantidade</th>
-            <th>Valor Unitário</th>
-            <th>Sub-total</th>
-          </tr>
-        </thead>
-        <tbody>
-          {order?.products ? order.products.map((item, i) => (<SellerOrderTable
-            key={ i }
-            item={ item }
-            index={ i }
-          />)) : <tr />}
-        </tbody>
-      </table>
+      <div className="order-details">
+        <div className="order-info-container">
+          <span
+            data-testid="seller_order_details__element-order-details-label-order-id"
+            style={ { fontWeight: 'bold' } }
+          >
+            {`PEDIDO: 0${order.id}`}
+          </span>
+          <span
+            data-testid="customer_order_details__element-order
+        -details-label-seller-name"
+            style={ { fontWeight: 'bold' } }
+          >
+            {`P. Vend: ${order?.sellerName && order.sellerName}`}
+          </span>
+          <span
+            data-testid="seller_order_details__element-order-
+          details-label-order-date"
+            style={ { fontWeight: 'bold' } }
+          >
+            {order.saleDate}
+          </span>
+          <span
+            data-testid="seller_order_details__element-
+            order-details-label-delivery-status"
+            style={ { fontWeight: 'bold' } }
+          >
+            {order.status}
+          </span>
+          <button
+            type="button"
+            data-testid="seller_order_details__button-preparing-check"
+            disabled={ order.status !== 'Pendente' }
+            className={ order.status !== 'Pendente'
+              ? 'btn btn-outline-success' : 'btn btn-success' }
+            onClick={ () => changeStatus('Preparando') }
+          >
+            Em Preparo
+          </button>
+          <button
+            type="button"
+            className={ order.status !== 'Preparando'
+              ? 'btn btn-outline-success' : 'btn btn-success' }
+            data-testid="seller_order_details__button-dispatch-check"
+            disabled={ order.status !== 'Preparando' }
+            onClick={ () => changeStatus('Em Trânsito') }
+          >
+            Enviado
+          </button>
+        </div>
+        <CustomerDetailsTable order={ order } />
+        <span
+          data-testid="seller_order_details__element-order-total-price"
+          className="total-price-btn"
+        >
+          {`Total: R$ ${order?.totalPrice && order.totalPrice.replace(/\./, ',')}`}
+        </span>
+      </div>
     </div>
   );
 }

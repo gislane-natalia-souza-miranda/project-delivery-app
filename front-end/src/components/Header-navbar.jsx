@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import '../styles/Header-navbar.css';
 
 function HeaderNavBar() {
   const [user, setUser] = useState('');
@@ -10,31 +11,39 @@ function HeaderNavBar() {
   }, []);
 
   return (
-    <div>
-      <Link
-        to="/customer/products"
-        data-testid="customer_products__element-navbar-link-products"
+    <div className="header-container">
+      <div>
+        <Link
+          to="/customer/products"
+          data-testid="customer_products__element-navbar-link-products"
+          className="btn btn-success"
+          style={ { marginRight: '10px' } }
+        >
+          Produtos
+        </Link>
+        <Link
+          to="/customer/orders"
+          data-testid="customer_products__element-navbar-link-orders"
+          className="btn btn-success"
+
+        >
+          Pedidos
+        </Link>
+      </div>
+      <span
+        data-testid="customer_products__element-navbar-user-full-name"
+        style={ { fontWeight: 'bold', fontSize: '15pt' } }
       >
-        Produtos
-      </Link>
-      <Link
-        to="/customer/orders"
-        data-testid="customer_products__element-navbar-link-orders"
-      >
-        Pedidos
-      </Link>
-      <span data-testid="customer_products__element-navbar-user-full-name">
         { user }
       </span>
-      <button
-        type="button"
+      <Link
+        to="/login"
+        className="btn btn-danger"
         data-testid="customer_products__element-navbar-link-logout"
         onClick={ () => localStorage.clear('user') }
       >
-        <Link to="/login">
-          Logout
-        </Link>
-      </button>
+        Logout
+      </Link>
     </div>
   );
 }

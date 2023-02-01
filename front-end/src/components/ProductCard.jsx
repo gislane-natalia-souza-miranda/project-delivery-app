@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import '../styles/ProductCard.css';
 
 export default function ProducCard({ item, index, calculateTotal }) {
   const [quantity, setQuantity] = useState(0);
@@ -36,47 +37,55 @@ export default function ProducCard({ item, index, calculateTotal }) {
   }, [quantity]);
 
   return (
-    <div key={ index }>
-      <h6 data-testid={ `customer_products__element-card-title-${item.id}` }>
+    <div key={ index } className="product-card-container">
+      <h6
+        data-testid={ `customer_products__element-card-title-${item.id}` }
+      >
         {item.name}
       </h6>
-      <h6 data-testid={ `customer_products__element-card-price-${item.id}` }>
-        { `R$ ${item.price.replace(/\./, ',')}` }
-      </h6>
       <img
-        style={ { width: '60px', height: '100px' } }
         alt={ item.name }
         src={ item.urlImage }
         data-testid={ `customer_products__img-card-bg-image-${item.id}` }
       />
-      <button
-        type="button"
-        data-testid={ `customer_products__button-card-add-item-${item.id}` }
-        onClick={ () => setQuantity((prevState) => {
-          const result = prevState + 1;
-          return result;
-        }) }
-      >
-        ADD
-      </button>
-      <button
-        type="button"
-        data-testid={ `customer_products__button-card-rm-item-${item.id}` }
-        onClick={ () => setQuantity((prevState) => {
-          const result = prevState - 1;
-          return result;
-        }) }
-      >
-        REMOVE
-      </button>
-      <input
-        type="number"
-        value={ quantity }
-        onChange={ (e) => {
-          setQuantity(Number(e.target.value));
-        } }
-        data-testid={ `customer_products__input-card-quantity-${item.id}` }
-      />
+      <span data-testid={ `customer_products__element-card-price-${item.id}` }>
+        { `R$ ${item.price.replace(/\./, ',')}` }
+      </span>
+      <div style={ { display: 'flex', alignItems: 'center' } }>
+        <button
+          type="button"
+          data-testid={ `customer_products__button-card-rm-item-${item.id}` }
+          className="btn btn-danger"
+          style={ { width: '36px' } }
+          onClick={ () => setQuantity((prevState) => {
+            const result = prevState - 1;
+            return result;
+          }) }
+        >
+          -
+        </button>
+        <input
+          type="text"
+          value={ quantity }
+          style={ { width: '45px', textAlign: 'center' } }
+          className="form-control"
+          onChange={ (e) => {
+            setQuantity(Number(e.target.value));
+          } }
+          data-testid={ `customer_products__input-card-quantity-${item.id}` }
+        />
+        <button
+          type="button"
+          data-testid={ `customer_products__button-card-add-item-${item.id}` }
+          className="btn btn-success"
+          onClick={ () => setQuantity((prevState) => {
+            const result = prevState + 1;
+            return result;
+          }) }
+        >
+          +
+        </button>
+      </div>
     </div>
   );
 }

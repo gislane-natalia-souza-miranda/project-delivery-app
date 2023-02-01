@@ -42,24 +42,27 @@ function CustomerProducts() {
   return (
     <div>
       <HeaderNavBar />
-      {products.map((item, index) => (<ProductCard
-        key={ index }
-        item={ item }
-        index={ index }
-        calculateTotal={ calculateTotal }
-      />))}
-      <button
-        type="button"
-        data-testid="customer_products__button-cart"
-        onClick={ () => navigate('/customer/checkout') }
-        disabled={ price === 0.00 }
-      >
-        <span
-          data-testid="customer_products__checkout-bottom-value"
+      <div className="product-page-container">
+        {products.map((item, index) => (<ProductCard
+          key={ index }
+          item={ item }
+          index={ index }
+          calculateTotal={ calculateTotal }
+        />))}
+        <button
+          type="button"
+          data-testid="customer_products__button-cart"
+          onClick={ () => navigate('/customer/checkout') }
+          disabled={ price === 0.00 }
+          className="cart-product-btn btn btn-success"
         >
-          {`Ver carrinho: R$ ${price && price.toFixed(2).replace(/\./, ',')}`}
-        </span>
-      </button>
+          <span
+            data-testid="customer_products__checkout-bottom-value"
+          >
+            {`Ver carrinho: R$ ${price && price.toFixed(2).replace(/\./, ',')}`}
+          </span>
+        </button>
+      </div>
     </div>
   );
 }

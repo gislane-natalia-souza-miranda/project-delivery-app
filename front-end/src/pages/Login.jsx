@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import propTypes from 'prop-types';
 import LoginForm from '../components/Login-form';
 
-function Login() {
+function Login({ setAuth }) {
   const navigate = useNavigate();
 
-  // modifiquei aqui
   useEffect(() => {
     const sales = async () => {
       const user = JSON.parse(localStorage.getItem('user'));
@@ -25,8 +25,12 @@ function Login() {
   }, []);
 
   return (
-    <LoginForm />
+    <LoginForm setAuth={ setAuth } />
   );
 }
+
+Login.propTypes = {
+  setAuth: propTypes.func.isRequired,
+};
 
 export default Login;

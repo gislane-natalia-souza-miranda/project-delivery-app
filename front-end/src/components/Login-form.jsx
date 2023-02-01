@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import propTypes from 'prop-types';
 import api from '../services/axios';
 
-function LoginForm() {
+function LoginForm({ setAuth }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [enableLogin, setEnableLogin] = useState(false);
@@ -25,8 +26,8 @@ function LoginForm() {
         email,
         password,
       });
-      console.log('data: ', data.role);
       localStorage.user = JSON.stringify(data);
+      setAuth();
       if (data.role === 'administrator') {
         return navigate('/admin/manage');
       }
@@ -97,5 +98,9 @@ function LoginForm() {
     </>
   );
 }
+
+LoginForm.propTypes = {
+  setAuth: propTypes.func.isRequired,
+};
 
 export default LoginForm;

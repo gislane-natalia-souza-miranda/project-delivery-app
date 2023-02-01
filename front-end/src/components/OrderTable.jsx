@@ -11,7 +11,10 @@ export default function OrderTable({ item, index }) {
       >
         {id}
       </td>
-      <td data-testid={ `customer_order_details__element-order-table-name-${i}` }>
+      <td
+        data-testid={ `customer_order_details__element-order-table-name-${i}` }
+        style={ { textAlign: 'start' } }
+      >
         {name}
       </td>
       <td

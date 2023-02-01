@@ -1,0 +1,11 @@
+.header-container {
+  align-items: center;
+  background-color: #198754;
+  color: white;
+  display: flex;
+  height: 50px;
+  justify-content: space-between;
+  padding: 0 10px;
+  position: fixed;
+  width: 100%;
+}

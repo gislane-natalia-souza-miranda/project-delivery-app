@@ -12,25 +12,28 @@ function HeaderAdmin() {
   }, []);
 
   return (
-    <div>
+    <div className="header-container">
       <Link
         to="/customer/products" // mudar aqui
         data-testid="customer_products__element-navbar-link-orders"
+        className="btn btn-primary"
       >
         Gerenciar Usuários
       </Link>
-      <span data-testid="customer_products__element-navbar-user-full-name">
+      <span
+        data-testid="customer_products__element-navbar-user-full-name"
+        style={ { fontWeight: 'bold', fontSize: '15pt' } }
+      >
         {user}
       </span>
-      <button
-        type="button"
+      <Link
+        to="/login"
+        className="btn btn-danger"
         data-testid="customer_products__element-navbar-link-logout"
         onClick={ () => localStorage.clear('user') }
       >
-        <Link to="/login">
-          Logout
-        </Link>
-      </button>
+        Logout
+      </Link>
     </div>
   );
 }

@@ -50,12 +50,16 @@ function NewUser() {
 
   return (
     <div className="admin-container">
-      <form onSubmit={ sendRegistre }>
-
-        <h4> Cadastrar novo usuário </h4>
+      <h4> Cadastrar novo usuário </h4>
+      <form
+        onSubmit={ sendRegistre }
+        style={ { display: 'flex',
+          gap: '10px',
+          alignItems: 'flex-end' } }
+      >
 
         <label htmlFor="name">
-          Nome:
+          <b>Nome</b>
           <input
             data-testid="admin_manage__input-name"
             type="text"
@@ -66,7 +70,7 @@ function NewUser() {
         </label>
 
         <label htmlFor="email">
-          Email:
+          <b>Email</b>
           <input
             data-testid="admin_manage__input-email"
             type="email"
@@ -78,7 +82,7 @@ function NewUser() {
         </label>
 
         <label htmlFor="password">
-          Senha:
+          <b>Senha</b>
           <input
             data-testid="admin_manage__input-password"
             type="password"
@@ -90,7 +94,7 @@ function NewUser() {
         </label>
 
         <label htmlFor="role">
-          Tipo:
+          <b>Tipo</b>
           <select
             data-testid="admin_manage__select-role"
             name="role"

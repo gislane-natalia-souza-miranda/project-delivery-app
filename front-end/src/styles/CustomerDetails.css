@@ -24,3 +24,8 @@
   justify-content: space-around;
   padding: 5px;
 }
+
+.status-customer-details {
+  border-radius: 8px;
+  padding: 7px 30px;
+}

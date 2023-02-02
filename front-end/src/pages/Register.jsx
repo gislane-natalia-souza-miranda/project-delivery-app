@@ -45,10 +45,10 @@ export default function Register() {
 
   return (
     <div className="login-container">
-      <form autoComplete="off" onSubmit={ handleSubmit }>
+      <form autoComplete="off" onSubmit={ handleSubmit } className="login-form-container">
         <div className="form-group">
           <label htmlFor="name">
-            Nome:
+            <b>Nome</b>
             <input
               type="text"
               name="name"
@@ -62,7 +62,7 @@ export default function Register() {
         </div>
         <div className="form-group">
           <label htmlFor="email">
-            Email:
+            <b>Email</b>
             <input
               type="text"
               name="email"
@@ -76,7 +76,7 @@ export default function Register() {
         </div>
         <div className="form-group">
           <label htmlFor="password">
-            Senha:
+            <b>Senha</b>
             <input
               type="password"
               name="password"

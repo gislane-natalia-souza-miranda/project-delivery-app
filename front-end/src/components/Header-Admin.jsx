@@ -16,7 +16,7 @@ function HeaderAdmin() {
       <Link
         to="/customer/products" // mudar aqui
         data-testid="customer_products__element-navbar-link-orders"
-        className="btn btn-primary"
+        className="btn btn-success"
       >
         Gerenciar Usuários
       </Link>

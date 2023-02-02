@@ -49,12 +49,13 @@ function LoginForm({ setAuth }) {
 
     setEnableLogin(isValidEmail && isValidPassword);
   }, [email, password]);
+
   return (
     <div className="login-container">
-      <form>
+      <form className="login-form-container">
         <div className="form-group">
           <label htmlFor="email">
-            Login
+            <b>Login</b>
             <input
               data-testid="common_login__input-email"
               type="email"
@@ -67,7 +68,7 @@ function LoginForm({ setAuth }) {
         </div>
         <div className="form-group">
           <label htmlFor="password">
-            Senha
+            <b>Senha</b>
             <input
               data-testid="common_login__input-password"
               type="password"

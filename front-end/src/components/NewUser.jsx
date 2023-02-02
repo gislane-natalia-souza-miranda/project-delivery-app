@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import api from '../services/axios';
 import '../styles/Admin.css';
 
-function NewUser() {
+function NewUser({ getUsers }) {
   const [inputs, setInputs] = useState({
     name: '',
     password: '',
@@ -31,6 +32,7 @@ function NewUser() {
       );
 
       localStorage.user = JSON.stringify(data);
+      getUsers();
       return navigate('/admin/manage');
     } catch (err) {
       console.log(err);
@@ -49,7 +51,7 @@ function NewUser() {
   }, [inputs]);
 
   return (
-    <div className="admin-container">
+    <div>
       <h4> Cadastrar novo usuário </h4>
       <form
         onSubmit={ sendRegistre }
@@ -121,17 +123,19 @@ function NewUser() {
       { error && (
         <span
           data-testid="admin_manage__element-invalid-register"
+          className="alert alert-danger"
+          style={ { position: 'fixed', bottom: '0', right: '45%' } }
         >
           Falha no cadastro!
         </span>
       )}
-
-      <div>
-        <h4> Lista de usuários </h4>
-      </div>
     </div>
 
   );
 }
+
+NewUser.propTypes = {
+  getUsers: PropTypes.func,
+}.isRequired;
 
 export default NewUser;

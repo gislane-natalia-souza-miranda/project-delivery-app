@@ -6,4 +6,23 @@
   gap: 20px;
   height: 100vh;
   justify-content: center;
+  text-align: center;
+}
+
+.adm-users-table {
+  background-color: whitesmoke;
+  border-radius: 8px;
+  box-shadow: 3px 3px 3px gray;
+  height: 300px;
+  overflow: auto;
+  padding: 10px;
+  width: 80%;
+}
+
+.adm-users-table::-webkit-scrollbar {
+  width: 5px;
+}
+
+.adm-users-table::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
 }

@@ -6,6 +6,21 @@ import SellerNav from '../components/sellers/Seller-nav';
 import CustomerDetailsTable from '../components/CustomerDetailsTable';
 
 export default function CustomerDetails() {
+  const obj = {
+    Pendente: {
+      backgroundColor: '#ccb800',
+    },
+    'Em Trânsito': {
+      backgroundColor: '#056CF9',
+    },
+    Entregue: {
+      backgroundColor: '#00CC9B',
+    },
+    Preparando: {
+      backgroundColor: '#66CC00',
+    },
+  };
+
   const [user, setUser] = useState((''));
   const [order, setOrder] = useState({});
   const { id } = useParams();
@@ -62,7 +77,8 @@ export default function CustomerDetails() {
           <span
             data-testid="seller_order_details__element-
             order-details-label-delivery-status"
-            style={ { fontWeight: 'bold' } }
+            className="status-customer-details"
+            style={ obj[order.status] }
           >
             {order.status}
           </span>

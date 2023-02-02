@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../services/axios';
+import '../styles/Admin.css';
 
 function NewUser() {
   const [inputs, setInputs] = useState({
@@ -48,8 +49,11 @@ function NewUser() {
   }, [inputs]);
 
   return (
-    <>
+    <div className="admin-container">
       <form onSubmit={ sendRegistre }>
+
+        <h4> Cadastrar novo usuário </h4>
+
         <label htmlFor="name">
           Nome:
           <input
@@ -57,6 +61,7 @@ function NewUser() {
             type="text"
             name="name"
             onChange={ handleChange }
+            className="form-control"
           />
         </label>
 
@@ -68,6 +73,7 @@ function NewUser() {
             name="email"
             value={ inputs.email }
             onChange={ handleChange }
+            className="form-control"
           />
         </label>
 
@@ -79,6 +85,7 @@ function NewUser() {
             name="password"
             value={ inputs.password }
             onChange={ handleChange }
+            className="form-control"
           />
         </label>
 
@@ -88,6 +95,7 @@ function NewUser() {
             data-testid="admin_manage__select-role"
             name="role"
             onChange={ handleChange }
+            className="form-select"
           >
             <option value="customer">Cliente</option>
             <option value="administrator">Administrador(a)</option>
@@ -100,6 +108,7 @@ function NewUser() {
           type="submit"
           disabled={ !enableRegistre }
           onClick={ sendRegistre }
+          className="btn btn-success"
         >
           Cadastrar
         </button>
@@ -113,7 +122,11 @@ function NewUser() {
         </span>
       )}
 
-    </>
+      <div>
+        <h4> Lista de usuários </h4>
+      </div>
+    </div>
+
   );
 }
 

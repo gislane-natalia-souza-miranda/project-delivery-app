@@ -7,6 +7,7 @@ function Admin() {
       <HeaderAdmin />
 
       <NewUser />
+
     </>
   );
 }

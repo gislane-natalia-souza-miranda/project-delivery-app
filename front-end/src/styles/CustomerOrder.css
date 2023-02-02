@@ -1,0 +1,32 @@
+.customer-order-container {
+  background-color: rgb(141, 206, 141);
+  display: grid;
+  gap: 30px;
+  grid-template-columns: 400px 400px 400px;
+  height: 100vh;
+  justify-content: center;
+  padding: 30px;
+  padding-top: 80px;
+}
+
+.customer-card-container {
+  align-items: center;
+  background-color: #d9d9d9;
+  border-radius: 7px;
+  box-shadow: 3px 3px 3px gray;
+  display: flex;
+  flex-direction: column;
+  height: 200px;
+  justify-content: center;
+  padding: 20px;
+  width: 400px;
+}
+
+.order-info-container {
+  align-items: center;
+  background-color: #d9d9d9;
+  border-radius: 1000px;
+  display: flex;
+  justify-content: space-around;
+  width: '100%';
+}

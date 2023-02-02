@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import SellerNav from '../components/sellers/Seller-nav';
 import SellerOrder from '../components/sellers/Seller-order';
 import api from '../services/axios';
+import '../styles/CustomerOrder.css';
 
 function SellerOrders() {
   const [user, setUser] = useState({});
@@ -29,9 +30,9 @@ function SellerOrders() {
   return (
     <>
       <SellerNav user={ user } />
-      <ul>
+      <div className="customer-order-container">
         { orders && orders.map((item) => <SellerOrder key={ item.id } order={ item } />) }
-      </ul>
+      </div>
     </>
   );
 }

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import propTypes from 'prop-types';
 import api from '../services/axios';
+import '../styles/Login.css';
 
 function LoginForm({ setAuth }) {
   const [email, setEmail] = useState('');
@@ -49,43 +50,57 @@ function LoginForm({ setAuth }) {
     setEnableLogin(isValidEmail && isValidPassword);
   }, [email, password]);
   return (
-    <>
+    <div className="login-container">
       <form>
-        <label htmlFor="email">
-          email:
-          <input
-            data-testid="common_login__input-email"
-            type="email"
-            name="email"
-            value={ email }
-            onChange={ handleChange }
-          />
-        </label>
-        <label htmlFor="password">
-          password:
-          <input
-            data-testid="common_login__input-password"
-            type="password"
-            name="password"
-            value={ password }
-            onChange={ handleChange }
-          />
-        </label>
-        <button
-          data-testid="common_login__button-login"
-          type="button"
-          disabled={ !enableLogin }
-          onClick={ sendLogin }
-        >
-          LOGIN
-        </button>
-        <button
-          data-testid="common_login__button-register"
-          type="button"
-          onClick={ () => navigate('/register') }
-        >
-          Ainda não tenho conta
-        </button>
+        <div className="form-group">
+          <label htmlFor="email">
+            Login
+            <input
+              data-testid="common_login__input-email"
+              type="email"
+              name="email"
+              value={ email }
+              onChange={ handleChange }
+              className="form-control"
+            />
+          </label>
+        </div>
+        <div className="form-group">
+          <label htmlFor="password">
+            Senha
+            <input
+              data-testid="common_login__input-password"
+              type="password"
+              name="password"
+              value={ password }
+              onChange={ handleChange }
+              className="form-control"
+            />
+          </label>
+        </div>
+        <div className="form-group">
+          <button
+            data-testid="common_login__button-login"
+            type="button"
+            disabled={ !enableLogin }
+            onClick={ sendLogin }
+            className="btn btn-success"
+            style={ { width: '100%' } }
+          >
+            LOGIN
+          </button>
+        </div>
+        <div className="form-group">
+          <button
+            data-testid="common_login__button-register"
+            type="button"
+            onClick={ () => navigate('/register') }
+            className="btn btn-outline-success"
+            style={ { width: '100%' } }
+          >
+            Ainda não tenho conta
+          </button>
+        </div>
       </form>
       { error && (
         <span
@@ -95,7 +110,7 @@ function LoginForm({ setAuth }) {
         </span>
       )}
 
-    </>
+    </div>
   );
 }
 

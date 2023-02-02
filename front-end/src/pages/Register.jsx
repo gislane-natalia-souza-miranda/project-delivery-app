@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../services/axios';
+import '../styles/Login.css';
 
 export default function Register() {
   const [inputs, setInputs] = useState({
@@ -43,52 +44,67 @@ export default function Register() {
   }, [inputs]);
 
   return (
-    <form autoComplete="off" onSubmit={ handleSubmit }>
-      <label htmlFor="name">
-        Nome:
-        <input
-          type="text"
-          name="name"
-          placeholder="Ex: Jon Doe"
-          value={ inputs.name }
-          onChange={ handleChanges }
-          data-testid="common_register__input-name"
-        />
-      </label>
-      <label htmlFor="email">
-        Email:
-        <input
-          type="text"
-          name="email"
-          placeholder="exemplo@email.com"
-          value={ inputs.email }
-          onChange={ handleChanges }
-          data-testid="common_register__input-email"
-        />
-      </label>
-      <label htmlFor="password">
-        Senha:
-        <input
-          type="password"
-          name="password"
-          value={ inputs.password }
-          onChange={ handleChanges }
-          data-testid="common_register__input-password"
-        />
-      </label>
-      <button
-        type="submit"
-        disabled={ disableBtn }
-        data-testid="common_register__button-register"
-      >
-        CADASTRAR
-      </button>
-      <span
-        style={ error ? { display: 'inline' } : { display: 'none' } }
-        data-testid="common_register__element-invalid_register"
-      >
-        Erro
-      </span>
-    </form>
+    <div className="login-container">
+      <form autoComplete="off" onSubmit={ handleSubmit }>
+        <div className="form-group">
+          <label htmlFor="name">
+            Nome:
+            <input
+              type="text"
+              name="name"
+              placeholder="Ex: Jon Doe"
+              value={ inputs.name }
+              onChange={ handleChanges }
+              data-testid="common_register__input-name"
+              className="form-control"
+            />
+          </label>
+        </div>
+        <div className="form-group">
+          <label htmlFor="email">
+            Email:
+            <input
+              type="text"
+              name="email"
+              placeholder="exemplo@email.com"
+              value={ inputs.email }
+              onChange={ handleChanges }
+              data-testid="common_register__input-email"
+              className="form-control"
+            />
+          </label>
+        </div>
+        <div className="form-group">
+          <label htmlFor="password">
+            Senha:
+            <input
+              type="password"
+              name="password"
+              value={ inputs.password }
+              onChange={ handleChanges }
+              data-testid="common_register__input-password"
+              className="form-control"
+            />
+          </label>
+        </div>
+        <div className="form-group">
+          <button
+            type="submit"
+            disabled={ disableBtn }
+            data-testid="common_register__button-register"
+            className="btn btn-success"
+            style={ { width: '100%' } }
+          >
+            CADASTRAR
+          </button>
+        </div>
+        <span
+          style={ error ? { display: 'inline' } : { display: 'none' } }
+          data-testid="common_register__element-invalid_register"
+        >
+          Erro
+        </span>
+      </form>
+    </div>
   );
 }

@@ -4,8 +4,8 @@ import { NavLink } from 'react-router-dom';
 
 function SellerOrder({ order }) {
   return (
-    <NavLink to={ `/seller/orders/${order.id}` }>
-      <li>
+    <NavLink to={ `/seller/orders/${order.id}` } className="customer-card-container">
+      <div className="order-info-container">
 
         <div
           data-testid={ `seller_orders__element-order-id-${order.id}` }
@@ -39,7 +39,7 @@ function SellerOrder({ order }) {
 
         </div>
 
-      </li>
+      </div>
     </NavLink>
   );
 }

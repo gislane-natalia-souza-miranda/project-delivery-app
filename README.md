@@ -34,15 +34,15 @@ Back-end:
 
 Cliente:
 
-Email: zebirita@email.com Senha: $#zebirita#$
+Email: `zebirita@email.com` Senha: `$#zebirita#$`
 
 Vendedor:
 
-Email: fulana@deliveryapp.com Senha: fulana@123
+Email: `fulana@deliveryapp.com` Senha: `fulana@123`
 
 Admin:
 
-Email: adm@deliveryapp.com Senha: --adm2@21!!--
+Email: `adm@deliveryapp.com` Senha: `--adm2@21!!--`
 
 ## Como rodar localmente
 
